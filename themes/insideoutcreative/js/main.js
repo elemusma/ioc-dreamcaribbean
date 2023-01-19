@@ -1,3 +1,5 @@
+
+
 // start of bars
 let colFullBackground = document.querySelectorAll('.col-full-background');
 
@@ -6,6 +8,7 @@ const mediaQuery = window.matchMedia('(min-width: 1200px)')
 
 
 if (mediaQuery.matches) {
+
     for (i = 0; i < colFullBackground.length; i++) {
         let parentRow = colFullBackground[i].parentElement;
         let innerContentOuter = colFullBackground[i].querySelector('.inner-content-outer');
@@ -19,19 +22,19 @@ if (mediaQuery.matches) {
         // let imageTitle = innerContentOuter.querySelector('.image-title');
         // let transformHeight = innerContentOuter.offsetHeight - imageTitle.offsetHeight;
 
-        innerContentOuter.style.transform = `translate(0px, ${(innerContent.offsetHeight) + 10}px)`;
+        innerContentOuter.style.transform = `translate(0px, ${(innerContent.offsetHeight) + 70}px)`;
 
         // window.addEventListener('resize', function () {
         innerContentOuter.addEventListener('mouseenter', function () {
             parentRow.classList.add('active-inner-col');
             innerContentOuter.parentElement.classList.add('active');
-            innerContentOuter.style.transform = `translate(0px, 0px)`;
+            innerContentOuter.style.transform = `translate(0px, -30px)`;
         })
 
         innerContentOuter.addEventListener('mouseleave', function () {
             innerContentOuter.parentElement.classList.remove('active');
             parentRow.classList.remove('active-inner-col');
-            innerContentOuter.style.transform = `translate(0px, ${(innerContent.offsetHeight) + 10}px)`;
+            innerContentOuter.style.transform = `translate(0px, ${(innerContent.offsetHeight) + 70}px)`;
         })
         // });
 

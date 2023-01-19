@@ -74,6 +74,7 @@ function dream_caribbean_stylesheets_footer() {
 	if(!is_front_page()){
 		wp_enqueue_script('nav-js', get_theme_file_uri('/js/nav.js'));
 	}
+	
 	wp_enqueue_script('popup-js', get_theme_file_uri('/js/popup.js'));
 	wp_enqueue_script('main-js', get_theme_file_uri('/js/main.js'));
 	

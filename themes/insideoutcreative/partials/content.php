@@ -50,6 +50,7 @@ echo '<div class="d-flex align-items-center w-100">';
 echo '</div>';
 echo '</div>';
 
+echo '<div class="container-fluid" style="">';
 echo '<div class="row" style="">';
 
 while(have_rows('individual_bars')): the_row();
@@ -61,6 +62,7 @@ $ID = sanitize_title_with_dashes($title);
 $image = get_sub_field('image');
 $imageMobile = get_sub_field('image_mobile');
 $icon = get_sub_field('icon');
+$iconHover = get_sub_field('icon_on_hover');
 $innerContent = get_sub_field('inner_content');
 $link = get_sub_field('link');
 
@@ -98,24 +100,39 @@ echo '<div class="position-absolute h-100 col-full-background-overlay bg-black d
 
 echo '<div class="position-absolute w-100 h-100 bg-accent-secondary d-lg-none d-block" style="opacity:.5;pointer-events:none;top:0;mix-blend-mode:multiply;"></div>';
 
-echo '<div class="position-absolute w-100 h-100 col-full-background-borders" style="top:0;left:0;border-left:1px solid white;pointer-events:none;"></div>';
+if($barsCounter != 1){
+    echo '<div class="position-absolute w-100 h-100 col-full-background-borders" style="top:0;left:0;border-left:1px solid white;pointer-events:none;"></div>';
+}
 
 
-echo '<div class="position-relative inner-content-outer" style="transition:all .25s ease-in-out;">';
+echo '<div class="position-relative inner-content-outer pb-5" style="transition:all .25s ease-in-out;">';
+
+echo '<div class="position-absolute w-100 h-100 inner-content-details-hover-bg" style="
+background: #517476;
+height: 120%;
+top: -10%;
+z-index: -1;
+transition:all .25s ease-in-out;
+opacity:0;
+"></div>';
+
+echo '<div class="bg-accent-tertiary position-absolute inner-content-details-hover" style="height:75%;width:2px;left:25px;top:5%;transition:all .25s ease-in-out;opacity:0;"></div>';
+echo '<div class="bg-accent-tertiary position-absolute inner-content-details-hover" style="height:75%;width:2px;right:25px;top:5%;transition:all .25s ease-in-out;opacity:0;"></div>';
 
 if($link){
     echo '<a class="" href="' . esc_url( $link_url ) . '" target="' . esc_attr( $link_target ) . '" style="text-decoration:none;">';
 }
 
 echo '<div class="image-title">';
-echo '<div class="d-inline-block" style="">';
-echo wp_get_attachment_image($icon['id'],'full','',['class'=>'','style'=>'width:75px;height:75px;object-fit:contain;']);
+echo '<div class="d-inline-block position-relative" style="">';
+echo wp_get_attachment_image($icon['id'],'full','',['class'=>'icon-state','style'=>'width:75px;height:75px;object-fit:contain;transition:all .25s ease-in-out;']);
+echo wp_get_attachment_image($iconHover['id'],'full','',['class'=>'icon-hover position-absolute','style'=>'top:0;left:0;width:75px;height:75px;object-fit:contain;transition:all .25s ease-in-out;opacity: 0;pointer-events:none;']);
 echo '</div>';
 
 echo '<div class="mt-3 mb-3"><span class="h6 text-white">' . $title . '</span></div>';
 echo '</div>';
 
-echo '<div class="pl-3 pr-3 text-white inner-content">';
+echo '<div class="pl-5 pr-5 text-white inner-content">';
 echo $innerContent;
 echo '</div>';
 
@@ -128,7 +145,8 @@ echo '</div>';
 
 endwhile;
 
-echo '</div>';
+echo '</div>'; // end of row
+echo '</div>'; // end of row
 // echo '</div>';
 echo '</section>';
 endif;
