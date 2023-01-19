@@ -109,7 +109,7 @@ if($link){
 
 echo '<div class="image-title">';
 echo '<div class="d-inline-block" style="">';
-echo wp_get_attachment_image($icon['id'],'full','',['class'=>'','style'=>'width:35px;height:35px;object-fit:contain;']);
+echo wp_get_attachment_image($icon['id'],'full','',['class'=>'','style'=>'width:75px;height:75px;object-fit:contain;']);
 echo '</div>';
 
 echo '<div class="mt-3 mb-3"><span class="h6 text-white">' . $title . '</span></div>';
