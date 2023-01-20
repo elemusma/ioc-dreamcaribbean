@@ -1,5 +1,3 @@
-
-
 // start of bars
 let colFullBackground = document.querySelectorAll('.col-full-background');
 
@@ -41,3 +39,16 @@ if (mediaQuery.matches) {
     }
 }
 // end of bars
+
+
+// start of parallax
+let imgParallax = document.querySelectorAll('.img-parallax-custom');
+
+let parallaxLength = 0
+
+window.onscroll = function (e) {
+    for (i = 0; i < imgParallax.length; i++) {
+        imgParallax[i].style.transform = `translate(0px, ${-scrollY / 150}%)`;
+    }
+};
+// end of parallax

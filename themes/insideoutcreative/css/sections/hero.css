@@ -1,4 +1,5 @@
-.logged-in header.position-fixed {
+.logged-in header.position-fixed,
+.logged-in .blank-space {
     margin-top: 32px;
 }
 
@@ -11,4 +12,10 @@
 body:not(.home) .img-hero {
     min-height: 200px;
     height: 30vh;
+}
+
+@media only screen and (max-width:991px) {
+    .hero-padding {
+        padding: 225px 0px 150px !important;
+    }
 }

@@ -88,6 +88,14 @@ h1 {
   font-size: 3rem;
 }
 
+.ls-2 {
+  letter-spacing: .2em;
+}
+
+.ls-4 {
+  letter-spacing: .4em;
+}
+
 /* Cormorant Garamond Regular
 font-family: cormorant-garamond, serif;
 font-weight: 400;
