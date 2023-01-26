@@ -116,8 +116,8 @@ transition:all .25s ease-in-out;
 opacity:0;
 "></div>';
 
-echo '<div class="bg-accent-tertiary position-absolute inner-content-details-hover" style="height:75%;width:2px;left:25px;top:5%;transition:all .25s ease-in-out;opacity:0;"></div>';
-echo '<div class="bg-accent-tertiary position-absolute inner-content-details-hover" style="height:75%;width:2px;right:25px;top:5%;transition:all .25s ease-in-out;opacity:0;"></div>';
+echo '<div class="position-absolute inner-content-details-hover" style="background:#33fff8;height:75%;width:2px;left:25px;top:5%;transition:all .25s ease-in-out;opacity:0;"></div>';
+echo '<div class="position-absolute inner-content-details-hover" style="background:#33fff8;height:75%;width:2px;right:25px;top:5%;transition:all .25s ease-in-out;opacity:0;"></div>';
 
 if($link){
     echo '<a class="" href="' . esc_url( $link_url ) . '" target="' . esc_attr( $link_target ) . '" style="text-decoration:none;">';
@@ -200,7 +200,9 @@ endwhile; endif;
         }
         
         echo '<div class="col-lg-6">';
-        echo wp_get_attachment_image($image['id'],'full','',['class'=>'w-100 h-100','style'=>'object-fit:cover;']);
+        if($image){
+            echo wp_get_attachment_image($image['id'],'full','',['class'=>'w-100 h-100','style'=>'object-fit:cover;']);
+        }
         echo '</div>';
         
         
@@ -235,14 +237,20 @@ endwhile; endif;
         echo '</div>';
     }
 
-    echo wp_get_attachment_image($img['id'],'full','',['class'=>'w-100 h-auto']);
+    if($img){
+        echo wp_get_attachment_image($img['id'],'full','',['class'=>'w-100 h-auto']);
+    }
 
     echo '</section>';
     
     endwhile; endif;
 } elseif ($layout == 'Yachts'){
     if(have_rows('yachts_group')): while(have_rows('yachts_group')): the_row();
-    $bgImg = get_sub_field('background_image');
+    
+    if(get_sub_field('display_yachst') == 'Yes'){
+        if(have_rows('yachts_content','options')): while(have_rows('yachts_content','options')): the_row();
+
+        $bgImg = get_sub_field('background_image');
     echo '<section class="position-relative ' . get_sub_field('classes') . '" style="padding:100px 0;' . get_sub_field('style') . '" id="' . get_sub_field('id') . '">';
 
     if($bgImg){
@@ -299,6 +307,11 @@ endwhile; endif;
     }
 
     echo '</section>';
+        
+        endwhile; endif;
+    }
+
+    
     endwhile; endif;
 }
 endwhile; endif;

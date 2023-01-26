@@ -117,17 +117,19 @@ if(have_rows('header_content')): while(have_rows('header_content')): the_row();
 
 $headerIcon = get_sub_field('header_icon');
 
-echo wp_get_attachment_image($headerIcon['id'],'full','',
-[
-    'class'=>'position-absolute',
-    'style'=>'
-        width: 75px;
-        height: 75px;
-        bottom: 25px;
-        left: 50%;
-        transform: translate(-50%,0);'
-]
-);
+if($headerIcon){
+    echo wp_get_attachment_image($headerIcon['id'],'full','',
+        [
+            'class'=>'position-absolute',
+            'style'=>'
+                width: 75px;
+                height: 75px;
+                bottom: 25px;
+                left: 50%;
+                transform: translate(-50%,0);'
+        ]
+    );
+}
 
 endwhile; endif;
 
@@ -136,11 +138,12 @@ echo '<div class="multiply overlay position-absolute w-100 h-100 bg-img"></div>'
 echo '<div class="position-relative">';
 echo '<div class="container">';
 echo '<div class="row justify-content-center">';
-echo '<div class="col-lg-9">';
+echo '<div class="col-lg-10">';
 
+echo '<div class="d-inline-block position-relative pl-5 pr-5">';
 echo get_template_part('partials/borders');
 
-echo '<h1 class="pt-3 pb-3 mb-0" style="letter-spacing:.2em;">' . get_the_title() . '</h1>';
+echo '<h1 class="pt-3 pb-3 mb-0 text-uppercase" style="letter-spacing:.2em;">' . get_the_title() . '</h1>';
 
 echo '<div class="pl-3 pr-3">';
 if ( have_posts() ) : while ( have_posts() ) : the_post();
@@ -148,6 +151,7 @@ the_content();
 endwhile; else:
     echo '<p>Sorry, no posts matched your criteria.</p>';
 endif;
+echo '</div>';
 echo '</div>';
 
 echo '</div>';

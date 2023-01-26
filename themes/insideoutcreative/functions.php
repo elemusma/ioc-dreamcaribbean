@@ -190,9 +190,9 @@ function btn_shortcode( $atts, $content = null ) {
 
 	$button = "";
 
-	$button .= '<a class="btn-main d-inline-block pt-3 pb-3 pl-4 pr-4 bg-accent-secondary text-white bold ls-2 small ' . esc_attr($a['class']) . '" href="' . esc_attr($a['href']) . '" style="transition:all .25s ease-in-out;box-shadow:0px 3px 3px rgba(0,0,0,.25);border:1px solid #b0bcbf;' . esc_attr($a['style']) . '" target="' . esc_attr($a['target']) . '">';
+	$button .= '<a class="btn-main d-inline-block pt-2 pb-2 pl-4 pr-4 bg-accent-secondary text-white bold ls-2 small ' . esc_attr($a['class']) . '" href="' . esc_attr($a['href']) . '" style="transition:all .25s ease-in-out;box-shadow:0px 3px 3px rgba(0,0,0,.25);border:1px solid #b0bcbf;' . esc_attr($a['style']) . '" target="' . esc_attr($a['target']) . '">';
 
-	$button .= '<span class="pt-2 pb-2 pl-5 pr-5 d-inline-block" style="border:1px solid white;">';
+	$button .= '<span class="pt-1 pb-1 pl-5 pr-5 d-inline-block" style="border:1px solid white;">';
 	$button .= $content;
 
 	$button .= '</span>';
