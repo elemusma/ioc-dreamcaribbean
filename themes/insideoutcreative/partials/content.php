@@ -157,6 +157,79 @@ endwhile; endif;
 // end of bars
 
 endwhile; endif;
+} elseif ($layout == 'Titles'){
+
+    if(have_rows('titles_group')): while(have_rows('titles_group')): the_row();
+    echo '<section class="text-center p-5 ' . get_sub_field('classes') . '" style="' . get_sub_field('style') . '" id="' . get_sub_field('id') . '">';
+    echo '<div class="d-inline-block pl-4 pr-4" style="border-left:2px solid #33fff8;border-right: 2px solid #33fff8;letter-spacing:.2em;">';
+    echo '<span class="h6 d-block">' . get_sub_field('pretitle') . '</span>';
+    echo '<h2 class="cormorant-garamond h1">' . get_sub_field('title') . '</h2>';
+    echo '</div>';
+    echo '</section>';
+endwhile; endif;
+} elseif ($layout == 'Content'){
+    if(have_rows('content_group')): while(have_rows('content_group')): the_row();
+    echo '<section class="text-center pb-5 ' . get_sub_field('classes') . '" style="' . get_sub_field('style') . '" id="' . get_sub_field('id') . '">';
+
+    echo '<div class="container">';
+    echo '<div class="row justify-content-center">';
+    echo '<div class="col-lg-9">';
+
+    echo get_sub_field('content');
+
+    echo '</div>';
+    echo '</div>';
+    echo '</div>';
+    
+    echo '</section>';
+    endwhile; endif;
+} elseif($layout == 'Content + Image'){
+    if(have_rows('content_image_group')): while(have_rows('content_image_group')): the_row();
+    echo '<section class="pt-5 pb-5 content-image ' . get_sub_field('classes') . '" style="background:#f5f5f5;' . get_sub_field('style') . '" id="' . get_sub_field('id') . '">';
+    
+    if(have_rows('content_image_repeater')): 
+        while(have_rows('content_image_repeater')): the_row();
+        $imgSide = get_sub_field('image_side');
+        $image = get_sub_field('image');
+        echo '<div class="container">';
+        
+        if($imgSide == 'Left'){
+            echo '<div class="row justify-content-between">';
+        } else {
+            echo '<div class="row justify-content-between flex-row-reverse">';
+        }
+        
+        echo '<div class="col-lg-6">';
+        echo wp_get_attachment_image($image['id'],'full','',['class'=>'w-100 h-100','style'=>'object-fit:cover;']);
+        echo '</div>';
+        
+        
+        echo '<div class="col-lg-6">';
+        echo '<div class="lead">';
+        echo get_sub_field('content');
+        echo '</div>';
+        echo '</div>';
+
+            echo '</div>';
+            echo '</div>';
+        endwhile; 
+    endif;
+    
+    echo '</section>';
+endwhile; endif;
+} elseif ($layout == 'Image'){
+    if(have_rows('image_group')): while(have_rows('image_group')): the_row();
+    $img = get_sub_field('image');
+
+    echo '<section class="pt-5 pb-5 ' . get_sub_field('classes') . '" style="' . get_sub_field('style') . '" id="' . get_sub_field('id') . '">';
+
+    echo wp_get_attachment_image($img['id'],'full','',['class'=>'w-100 h-auto']);
+
+    echo '</section>';
+    
+    endwhile; endif;
 }
 endwhile; endif;
+
+// echo 'title';
 ?>

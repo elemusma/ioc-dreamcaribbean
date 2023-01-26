@@ -22,5 +22,6 @@
 
 .btn-main:hover {
     background: var(--accent-secondary);
+    color: white;
     text-decoration: none;
 }

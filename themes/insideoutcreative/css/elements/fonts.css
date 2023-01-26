@@ -51,6 +51,10 @@ a.text-black:hover {
   white-space: nowrap;
 }
 
+p {
+  line-height: 2;
+}
+
 .wp-block-quote {
   border-left: 2px solid;
   margin: 0 0 1.75em;
