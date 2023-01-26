@@ -243,7 +243,7 @@ endwhile; endif;
 } elseif ($layout == 'Yachts'){
     if(have_rows('yachts_group')): while(have_rows('yachts_group')): the_row();
     $bgImg = get_sub_field('background_image');
-    echo '<section class="pt-5 pb-5 position-relative ' . get_sub_field('classes') . '" style="' . get_sub_field('style') . '" id="' . get_sub_field('id') . '">';
+    echo '<section class="position-relative ' . get_sub_field('classes') . '" style="padding:100px 0;' . get_sub_field('style') . '" id="' . get_sub_field('id') . '">';
 
     if($bgImg){
         echo wp_get_attachment_image($bgImg['id'],'full','',['class'=>'w-100 h-100 position-absolute','style'=>'top:0;left:0;object-fit:cover;']);

@@ -11,14 +11,14 @@
     color: white;
 }
 
-.btn-main {
+/* .btn-main {
     background: var(--accent-primary);
     padding: 10px 25px;
     transition: all .25s ease-in-out;
     display: inline-block;
     text-decoration: none;
     color: white;
-}
+} */
 
 .btn-main:hover {
     background: var(--accent-secondary);

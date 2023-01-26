@@ -187,8 +187,25 @@ function btn_shortcode( $atts, $content = null ) {
 	), $atts );
 	
 	// return '<a class="btn-accent-primary" href="' . esc_attr($a['href']) . '" target="' . esc_attr($a['target']) . '">' . $content . '</a>';
+
+	$button = "";
+
+	$button .= '<a class="btn-main d-inline-block pt-3 pb-3 pl-4 pr-4 bg-accent-secondary text-white bold ls-2 small ' . esc_attr($a['class']) . '" href="' . esc_attr($a['href']) . '" style="transition:all .25s ease-in-out;box-shadow:0px 3px 3px rgba(0,0,0,.25);border:1px solid #b0bcbf;' . esc_attr($a['style']) . '" target="' . esc_attr($a['target']) . '">';
+
+	$button .= '<span class="pt-2 pb-2 pl-5 pr-5 d-inline-block" style="border:1px solid white;">';
+	$button .= $content;
+
+	$button .= '</span>';
+	$button .= '</a>';
+
+	// $button = '''
+	// <a class="btn-main d-inline-block ' . esc_attr($a['class']) . '" href="' . esc_attr($a['href']) . '" style="' . esc_attr($a['style']) . '" target="' . esc_attr($a['target']) . '">
+	// <span class="pt-2 pb-2 pl-4 pr-4 d-inline-block" style="border:1px solid white;">'
+	// $content;
+	// '</span></a>
+	// ''';
 	
-	return '<a class="btn-main ' . esc_attr($a['class']) . '" href="' . esc_attr($a['href']) . '" style="' . esc_attr($a['style']) . '" target="' . esc_attr($a['target']) . '">' . $content . '</a>';
+	return $button;
 	
 	// [button href="#" class="btn-main" style=""]Learn More[/button]
 	
