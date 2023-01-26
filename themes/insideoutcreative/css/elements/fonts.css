@@ -89,6 +89,9 @@ blockquote {
 h1 {
   font-family: cormorant-garamond, serif;
   font-weight: 400;
+}
+
+h1 {
   font-size: 3rem;
 }
 
