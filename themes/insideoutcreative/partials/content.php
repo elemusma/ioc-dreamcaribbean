@@ -183,6 +183,37 @@ endwhile; endif;
     
     echo '</section>';
     endwhile; endif;
+} elseif($layout == 'Columns'){
+    if(have_rows('columns_group')): while(have_rows('columns_group')): the_row();
+    
+    echo '<section class="pt-5 pb-5 content-image ' . get_sub_field('classes') . '" style="' . get_sub_field('style') . '" id="' . get_sub_field('id') . '">';
+    echo '<div class="container">';
+    echo '<div class="row justify-content-between">';
+    if(have_rows('columns_repeater')): 
+        $columnsRepeater = 0;
+        while(have_rows('columns_repeater')): the_row();
+        $columnsRepeater++;
+            echo '<div class="col-lg-4 text-center">';
+
+            if($columnsRepeater != 1){
+                echo '<div 
+                    class="position-absolute h-100 bg-accent-secondary" 
+                    style="width:2px;left:0px;"
+                    ></div>';
+            }
+
+            echo '<h2 class="cormorant-garamond h3 ls-2">' . get_sub_field('title') . '</h2>';
+            echo '<h3 class="h5 ls-2">' . get_sub_field('subtitle') . '</h3>';
+            
+            echo '</div>';
+        endwhile; 
+    endif;
+    echo '</div>';
+    echo '</div>';
+    echo '</section>';
+
+    endwhile; endif;
+
 } elseif($layout == 'Content + Image'){
     if(have_rows('content_image_group')): while(have_rows('content_image_group')): the_row();
     echo '<section class="pt-5 pb-5 content-image ' . get_sub_field('classes') . '" style="background:#f5f5f5;' . get_sub_field('style') . '" id="' . get_sub_field('id') . '">';
@@ -247,7 +278,7 @@ endwhile; endif;
 } elseif ($layout == 'Yachts'){
     if(have_rows('yachts_group')): while(have_rows('yachts_group')): the_row();
     
-    if(get_sub_field('display_yachst') == 'Yes'){
+    if(get_sub_field('display_yachts') == 'Yes'){
         if(have_rows('yachts_content','options')): while(have_rows('yachts_content','options')): the_row();
 
         $bgImg = get_sub_field('background_image');
@@ -257,12 +288,12 @@ endwhile; endif;
         echo wp_get_attachment_image($bgImg['id'],'full','',['class'=>'w-100 h-100 position-absolute','style'=>'top:0;left:0;object-fit:cover;']);
     }
 
-    if(get_sub_field('content')){
+    if(get_sub_field('content_top')){
         echo '<div class="container">';
         echo '<div class="row justify-content-center">';
         echo '<div class="col-lg-9 text-center">';
 
-        echo get_sub_field('content');
+        echo get_sub_field('content_top');
 
         echo '</div>';
         echo '</div>';

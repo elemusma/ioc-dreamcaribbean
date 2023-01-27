@@ -53,6 +53,7 @@ a.text-black:hover {
 
 p {
   line-height: 2;
+  letter-spacing: 0.1em;
 }
 
 .wp-block-quote {
