@@ -138,7 +138,7 @@ if($headerIcon){
 
 endwhile; endif;
 
-echo '<div class="position-relative">';
+echo '<div class="position-relative test-connection">';
 echo '<div class="multiply overlay position-absolute w-100 h-100 bg-img"></div>';
 echo '<div class="position-relative">';
 echo '<div class="container">';
