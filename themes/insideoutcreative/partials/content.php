@@ -193,19 +193,52 @@ endwhile; endif;
         $columnsRepeater = 0;
         while(have_rows('columns_repeater')): the_row();
         $columnsRepeater++;
-            echo '<div class="col-lg-4 text-center">';
+        $fields = get_sub_field('field_group');
+            echo '<div class="col-lg-4 p-0">';
+            
+                
 
-            if($columnsRepeater != 1){
-                echo '<div 
-                    class="position-absolute h-100 bg-accent-secondary" 
-                    style="width:2px;left:0px;"
-                    ></div>';
+
+            if($columnsRepeater != 1 || $fields != 'Titles'){
+                if ($fields != 'Image' && $fields != 'Content'){
+                    echo '<div 
+                        class="position-absolute h-100 bg-accent-quaternary" 
+                        style="width:2px;left:0px;"
+                        ></div>';
+                }
             }
 
-            echo '<h2 class="cormorant-garamond h3 ls-2">' . get_sub_field('title') . '</h2>';
-            echo '<h3 class="h5 ls-2">' . get_sub_field('subtitle') . '</h3>';
-            
+            if ($fields == 'Titles'){
+                if(have_rows('titles_group')): while(have_rows('titles_group')): the_row();
+                echo '<div class="pl-3 pr-3">';
+                echo '<h2 class="cormorant-garamond h3 ls-2 text-center">' . get_sub_field('title') . '</h2>';
+                echo '<h3 class="h5 ls-2 text-center">' . get_sub_field('subtitle') . '</h3>';
+                echo '</div>';
+                endwhile; endif;
+            }
+            if ($fields == 'Content'){
+                echo '<div class="h-100 d-flex align-items-center justify-content-center pt-5 pb-5">';
+                echo '<div class="position-relative">';
+
+                echo '<div class="position-absolute h-100 bg-accent-quaternary" style="width:2px;left:0px;"></div>';
+
+                // if(have_rows('titles_group')): while(have_rows('titles_group')): the_row();
+                echo '<div class="mt-3" style="font-size:125%;line-height:2;">';
+                    echo get_sub_field('content');
+                echo '</div>';
+                echo '</div>'; 
             echo '</div>';
+                // endwhile; endif;
+            }
+            if ($fields == 'Image'){
+                $img = get_sub_field('image');
+                // if(have_rows('titles_group')): while(have_rows('titles_group')): the_row();
+                    echo wp_get_attachment_image($img['id'],'full','',['class'=>'w-100 h-100','style'=>'object-fit:cover;']);
+                // endwhile; endif;
+            }
+            
+            
+            echo '</div>'; // end of col
         endwhile; 
     endif;
     echo '</div>';
@@ -216,7 +249,7 @@ endwhile; endif;
 
 } elseif($layout == 'Content + Image'){
     if(have_rows('content_image_group')): while(have_rows('content_image_group')): the_row();
-    echo '<section class="pt-5 pb-5 content-image ' . get_sub_field('classes') . '" style="background:#f5f5f5;' . get_sub_field('style') . '" id="' . get_sub_field('id') . '">';
+    echo '<section class="pt-5 pb-5 content-image bg-light-gray ' . get_sub_field('classes') . '" style="' . get_sub_field('style') . '" id="' . get_sub_field('id') . '">';
     
     if(have_rows('content_image_repeater')): 
         while(have_rows('content_image_repeater')): the_row();
@@ -225,12 +258,12 @@ endwhile; endif;
         echo '<div class="container">';
         
         if($imgSide == 'Left'){
-            echo '<div class="row justify-content-between">';
+            echo '<div class="row justify-content-between align-items-end">';
         } else {
-            echo '<div class="row justify-content-between flex-row-reverse">';
+            echo '<div class="row justify-content-between align-items-end flex-row-reverse">';
         }
         
-        echo '<div class="col-lg-6">';
+        echo '<div class="col-lg-6 p-0">';
         if($image){
             echo wp_get_attachment_image($image['id'],'full','',['class'=>'w-100 h-100','style'=>'object-fit:cover;']);
         }
@@ -238,8 +271,13 @@ endwhile; endif;
         
         
         echo '<div class="col-lg-6">';
+        echo '<div class="pl-4 position-relative">';
+
+        echo '<div class="position-absolute bg-accent-quaternary" style="height:80%;width:2px;left:0px;bottom:0;"></div>';
+
         echo '<div class="lead">';
         echo get_sub_field('content');
+        echo '</div>';
         echo '</div>';
         echo '</div>';
 
@@ -343,6 +381,23 @@ endwhile; endif;
     }
 
     
+    endwhile; endif;
+} elseif($layout == 'Gallery'){
+    if(have_rows('gallery_group')): while(have_rows('gallery_group')): the_row();
+
+        $bgImg = get_sub_field('background_image');
+    echo '<section class="position-relative bg-light-gray ' . get_sub_field('classes') . '" style="padding:100px 0;' . get_sub_field('style') . '" id="' . get_sub_field('id') . '">';
+
+    if($bgImg){
+        echo wp_get_attachment_image($bgImg['id'],'full','',['class'=>'w-100 h-100 position-absolute','style'=>'top:0;left:0;object-fit:cover;']);
+    }
+
+        echo '<div class="container">';
+        echo '<div class="row justify-content-center">';
+
+        echo '</div>';
+        echo '</div>';
+
     endwhile; endif;
 }
 endwhile; endif;
