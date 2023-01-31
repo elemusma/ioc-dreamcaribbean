@@ -70,7 +70,7 @@
     }
 
     .col-full-background {
-        height: 30vh;
+        height: 35vh;
         min-height: 20vh !important;
         padding-top: 0 !important;
     }
@@ -80,6 +80,14 @@
         -ms-flex: 0 0 100%;
         flex: 0 0 100%;
         max-width: 100%;
+    }
+}
+
+@media only screen and (max-width:767px) {
+    .col-full-background {
+        height: 50vh;
+        min-height: 20vh !important;
+        padding-top: 0 !important;
     }
 }
 

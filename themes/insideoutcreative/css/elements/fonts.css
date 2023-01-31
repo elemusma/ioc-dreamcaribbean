@@ -105,6 +105,14 @@ h1,
   letter-spacing: .4em;
 }
 
+@media only screen and (max-width:767px) {
+
+  h1,
+  .h1 {
+    font-size: 2rem;
+  }
+}
+
 /* Cormorant Garamond Regular
 font-family: cormorant-garamond, serif;
 font-weight: 400;

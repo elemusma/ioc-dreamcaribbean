@@ -6,6 +6,8 @@ echo '<div class="container">';
 echo '<div class="row justify-content-center">';
 echo '<div class="col-md-5 text-center pb-5">';
 
+echo '<div class="d-inline-block position-relative">';
+
 echo get_template_part('partials/borders');
 
 echo '<a href="' . home_url() . '">';
@@ -20,6 +22,9 @@ echo wp_get_attachment_image($logo['id'],'full',"",['class'=>'w-100 h-auto','sty
 }
 
 echo '</a>';
+
+echo '</div>';
+
 echo '</div>';
 echo '</div>';
 echo '</div>';

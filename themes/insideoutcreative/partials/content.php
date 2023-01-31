@@ -11,7 +11,7 @@ if(have_rows('bars_group')): while(have_rows('bars_group')): the_row();
     // start of bars
 
 if(have_rows('bars_section')): while(have_rows('bars_section')): the_row();
-echo '<section class="pt-5 pb-5 position-relative d-lg-none" style="">';
+echo '<section class="pb-5 position-relative d-lg-none section-bars-mobile" style="padding-top:140px;">';
 echo '<div class="container">';
 echo '<div class="row justify-content-center">';
 
@@ -270,7 +270,7 @@ endwhile; endif;
         echo '</div>';
         
         
-        echo '<div class="col-lg-6">';
+        echo '<div class="col-lg-6 pt-lg-0 pt-5">';
         echo '<div class="pl-4 position-relative">';
 
         echo '<div class="position-absolute bg-accent-quaternary" style="height:80%;width:2px;left:0px;bottom:0;"></div>';

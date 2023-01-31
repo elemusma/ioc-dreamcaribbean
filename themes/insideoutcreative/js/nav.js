@@ -8,11 +8,16 @@ let blankSpace = document.querySelector('.blank-space');
 
 let logoMain = document.querySelector('#logo-main')
 
+blankSpaceHeight = (header.offsetHeight + 20) + "px"
+
+blankSpace.style.height = (header.offsetHeight + 20) + "px"
+
 window.addEventListener("scroll", parallaxEffect);
 
 function parallaxEffect() {
-    blankSpace.style.height = header.offsetHeight + "px";
-    // header.classList.add('position-fixed');
+    blankSpace.style.height = (header.offsetHeight + 20) + "px"
+    blankSpace.classList.add('active');
+    header.classList.add('active');
     // header.classList.remove('position-relative');
     if (scrollY < 299) {
         logoMain.style.width = "205px"

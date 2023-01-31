@@ -21,17 +21,20 @@ wp_head();
 <?php
 if(get_field('body','options')) { the_field('body','options'); }
 
-if(!is_front_page()) {
-echo '<div class="blank-space w-100 position-fixed z-2" style="
+
+echo '<div class="blank-space w-100 position-fixed" style="
 background: rgb(255,255,255);
 background: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(93,82,103,1) 90%);
+background: rgb(255,255,255);
+background: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(93,82,103,0.25) 20%, rgba(93,82,103,0.5) 40%, rgba(93,82,103,1) 90%);
 height:0px;
 mix-blend-mode:multiply;
 top:0;
 left:0;
 transition:all 1s ease-in-out;
+z-index:8;
 "></div>';
-echo '<header class="position-fixed pt-3 pb-3 z-3 w-100" style="top:0;left:0;">';
+echo '<header class="position-fixed pt-3 pb-3 w-100" style="top:0;left:0;z-index:9;">';
 
 echo '<div class="nav">';
 echo '<div class="container">';
@@ -94,6 +97,8 @@ echo '</div>';
 
 echo '</header>';
 
+if(!is_front_page()) {
+
 echo '<section class="hero position-relative overflow-h">';
 $globalPlaceholderImg = get_field('global_placeholder_image','options');
 if(is_page()){
@@ -140,7 +145,7 @@ echo '<div class="container">';
 echo '<div class="row justify-content-center">';
 echo '<div class="col-lg-10">';
 
-echo '<div class="d-inline-block position-relative pl-5 pr-5">';
+echo '<div class="d-inline-block position-relative" style="min-width:230px;">';
 echo get_template_part('partials/borders');
 
 echo '<h1 class="pt-3 pb-3 mb-0 text-uppercase" style="letter-spacing:.2em;">' . get_the_title() . '</h1>';
