@@ -48,8 +48,8 @@ a.bg-accent:hover {
   background: var(--accent-quaternary);
 }
 
-.bg-accent-light-gray {
-  background: var(--accent-light-gray);
+.bg-light-gray {
+  background: var(--light-gray);
 }
 
 a.bg-accent-secondary:hover {

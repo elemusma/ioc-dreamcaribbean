@@ -395,8 +395,24 @@ endwhile; endif;
         echo '<div class="container">';
         echo '<div class="row justify-content-center">';
 
+        $gallery = get_sub_field('gallery');
+        if( $gallery ): 
+            echo '<div class="gallery-carousel owl-carousel owl-theme arrows-middle">';
+            foreach( $gallery as $image ):
+                echo '<div class="img-hover overflow-h">';
+                // echo '<div class="position-relative">';
+                echo '<a href="' . wp_get_attachment_image_url($image['id'], 'full') . '" data-lightbox="image-set" data-title="' . $image['title'] . '">';
+                echo wp_get_attachment_image($image['id'], 'full','',['class'=>'w-100 img-portfolio','style'=>'height:450px;object-fit:cover;'] );
+                echo '</a>';
+                // echo '</div>';
+                echo '</div>';
+            endforeach;
+            echo '</div>';
+        endif;
+
         echo '</div>';
         echo '</div>';
+        echo '</section>';
 
     endwhile; endif;
 }
