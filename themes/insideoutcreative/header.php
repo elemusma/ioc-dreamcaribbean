@@ -148,7 +148,7 @@ echo '<div class="col-lg-10">';
 echo '<div class="d-inline-block position-relative" style="min-width:230px;">';
 echo get_template_part('partials/borders');
 
-echo '<h1 class="pt-3 pb-3 mb-0 text-uppercase" style="letter-spacing:.2em;">' . get_the_title() . '</h1>';
+echo '<h1 class="pt-3 pb-3 mb-0 text-uppercase pl-lg-4 pr-lg-4" style="letter-spacing:.2em;">' . get_the_title() . '</h1>';
 
 echo '<div class="pl-3 pr-3">';
 if ( have_posts() ) : while ( have_posts() ) : the_post();
