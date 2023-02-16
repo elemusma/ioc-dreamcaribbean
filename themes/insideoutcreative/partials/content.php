@@ -101,7 +101,7 @@ echo '<div class="position-absolute h-100 col-full-background-overlay bg-black d
 echo '<div class="position-absolute w-100 h-100 bg-accent-secondary d-lg-none d-block" style="opacity:.5;pointer-events:none;top:0;mix-blend-mode:multiply;"></div>';
 
 if($barsCounter != 1){
-    echo '<div class="position-absolute w-100 h-100 col-full-background-borders" style="top:0;left:0;border-left:1px solid white;pointer-events:none;"></div>';
+    echo '<div class="position-absolute w-100 h-100 col-full-background-borders" style="top:0;left:0;border-left:1px solid rgba(255,255,255,.5);pointer-events:none;"></div>';
 }
 
 
@@ -116,8 +116,8 @@ transition:all .25s ease-in-out;
 opacity:0;
 "></div>';
 
-echo '<div class="position-absolute inner-content-details-hover" style="background:#33fff8;height:75%;width:2px;left:25px;top:5%;transition:all .25s ease-in-out;opacity:0;"></div>';
-echo '<div class="position-absolute inner-content-details-hover" style="background:#33fff8;height:75%;width:2px;right:25px;top:5%;transition:all .25s ease-in-out;opacity:0;"></div>';
+echo '<div class="position-absolute inner-content-details-hover" style="background:var(--accent-secondary);height:75%;width:2px;left:25px;top:5%;transition:all .25s ease-in-out;opacity:0;"></div>';
+echo '<div class="position-absolute inner-content-details-hover" style="background:var(--accent-secondary);height:75%;width:2px;right:25px;top:5%;transition:all .25s ease-in-out;opacity:0;"></div>';
 
 if($link){
     echo '<a class="" href="' . esc_url( $link_url ) . '" target="' . esc_attr( $link_target ) . '" style="text-decoration:none;">';
