@@ -255,7 +255,7 @@ endwhile; endif;
         while(have_rows('content_image_repeater')): the_row();
         $imgSide = get_sub_field('image_side');
         $image = get_sub_field('image');
-        echo '<div class="container">';
+        echo '<div class="container pt-5">';
         
         if($imgSide == 'Left'){
             echo '<div class="row justify-content-between align-items-end">';
