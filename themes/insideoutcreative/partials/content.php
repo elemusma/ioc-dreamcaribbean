@@ -275,7 +275,7 @@ endwhile; endif;
 
         echo '<div class="position-absolute bg-accent-quaternary" style="height:80%;width:2px;left:0px;bottom:0;"></div>';
 
-        echo '<div class="lead">';
+        echo '<div class="">';
         echo get_sub_field('content');
         echo '</div>';
         echo '</div>';
