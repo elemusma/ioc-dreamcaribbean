@@ -94,3 +94,30 @@
 /* end of bars mobile */
 
 /* end of bars */
+
+/* start of pricing table */
+table.pricing-table {
+    width: 100%;
+    border: 1px solid #226c8a;
+}
+
+table.pricing-table th,
+table.pricing-table td {
+    width: 50%;
+    text-align: center;
+    color: #fefefe;
+}
+
+table.pricing-table th {
+    background: black;
+}
+
+table.pricing-table tr:nth-child(odd) {
+    background: #1b5271;
+}
+
+table.pricing-table tr:nth-child(even) {
+    background: #0e2948;
+}
+
+/* end of pricing table */

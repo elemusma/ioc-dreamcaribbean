@@ -169,7 +169,7 @@ endwhile; endif;
 endwhile; endif;
 } elseif ($layout == 'Content'){
     if(have_rows('content_group')): while(have_rows('content_group')): the_row();
-    echo '<section class="text-center pb-5 ' . get_sub_field('classes') . '" style="' . get_sub_field('style') . '" id="' . get_sub_field('id') . '">';
+    echo '<section class="text-center section-content pt-5 pb-5 ' . get_sub_field('classes') . '" style="' . get_sub_field('style') . '" id="' . get_sub_field('id') . '">';
 
     echo '<div class="container">';
     echo '<div class="row justify-content-center">';
@@ -186,7 +186,7 @@ endwhile; endif;
 } elseif($layout == 'Columns'){
     if(have_rows('columns_group')): while(have_rows('columns_group')): the_row();
     
-    echo '<section class="pt-5 pb-5 content-image ' . get_sub_field('classes') . '" style="' . get_sub_field('style') . '" id="' . get_sub_field('id') . '">';
+    echo '<section class="pt-5 pb-5 columns-repeater ' . get_sub_field('classes') . '" style="' . get_sub_field('style') . '" id="' . get_sub_field('id') . '">';
     echo '<div class="container">';
     echo '<div class="row justify-content-between">';
     if(have_rows('columns_repeater')): 
@@ -216,20 +216,24 @@ endwhile; endif;
                 echo '</div>';
                 endwhile; endif;
             }
+
             if ($fields == 'Content'){
+                echo '<div class="pl-3 pr-3">';
                 echo '<div class="h-100 d-flex align-items-center justify-content-center pt-5 pb-5">';
                 echo '<div class="position-relative">';
-
+                
                 echo '<div class="position-absolute h-100 bg-accent-quaternary" style="width:2px;left:0px;"></div>';
-
+                
                 // if(have_rows('titles_group')): while(have_rows('titles_group')): the_row();
                 echo '<div class="mt-3" style="font-size:125%;line-height:2;">';
-                    echo get_sub_field('content');
+                echo get_sub_field('content');
                 echo '</div>';
                 echo '</div>'; 
-            echo '</div>';
+                echo '</div>';
+                echo '</div>';
                 // endwhile; endif;
             }
+
             if ($fields == 'Image'){
                 $img = get_sub_field('image');
                 // if(have_rows('titles_group')): while(have_rows('titles_group')): the_row();
@@ -413,6 +417,42 @@ endwhile; endif;
         echo '</div>';
         echo '</div>';
         echo '</section>';
+
+    endwhile; endif;
+} elseif ( $layout == 'Review Gallery'){
+    if(have_rows('review_gallery')): while(have_rows('review_gallery')): the_row();
+
+    $bgImg = get_sub_field('background_image');
+    echo '<section class="position-relative bg-light-gray pt-5 pb-5 ' . get_sub_field('classes') . '" style="' . get_sub_field('style') . '" id="' . get_sub_field('id') . '">';
+
+    if($bgImg){
+        echo wp_get_attachment_image($bgImg['id'],'full','',['class'=>'w-100 h-100 position-absolute','style'=>'top:0;left:0;object-fit:cover;']);
+    }
+
+    $gallery = get_sub_field('gallery');
+
+    if( $gallery ): 
+    echo '<div class="container">';
+    echo '<div class="row justify-content-center">';
+            
+    foreach( $gallery as $image ):
+    echo '<div class="col-md-6 col col-portfolio mt-3 mb-3 overflow-h">';
+    echo '<div class="position-relative">';
+    // echo '<a href="' . wp_get_attachment_image_url($image['id'], 'full') . '" data-lightbox="image-set" data-title="' . $image['title'] . '">';
+    echo wp_get_attachment_image($image['id'], 'full','',[
+        'class'=>'w-100',
+        'style'=>'height:500px;object-fit:cover;'
+    ] );
+    // echo '</a>';
+    echo '</div>';
+    echo '</div>';
+    endforeach; 
+    echo '</div>';
+    echo '</div>';
+    endif;
+
+
+    echo '</section>';
 
     endwhile; endif;
 }

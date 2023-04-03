@@ -197,13 +197,6 @@ function btn_shortcode( $atts, $content = null ) {
 
 	$button .= '</span>';
 	$button .= '</a>';
-
-	// $button = '''
-	// <a class="btn-main d-inline-block ' . esc_attr($a['class']) . '" href="' . esc_attr($a['href']) . '" style="' . esc_attr($a['style']) . '" target="' . esc_attr($a['target']) . '">
-	// <span class="pt-2 pb-2 pl-4 pr-4 d-inline-block" style="border:1px solid white;">'
-	// $content;
-	// '</span></a>
-	// ''';
 	
 	return $button;
 	
@@ -229,6 +222,52 @@ function spacer_shortcode( $atts, $content = null ) {
 }
 
 add_shortcode( 'spacer', 'spacer_shortcode' );
+
+function pricing_table_shortcode( $atts, $content = null ) {
+
+	$a = shortcode_atts( array(
+
+		'class' => '',
+
+		'style' => ''
+
+	), $atts );
+
+	$pricingTable = "";
+
+	if(have_rows('pricing_table_repeater')):
+		$pricingTable .= '<table class="pricing-table mb-4 ' . esc_attr($a['class']) . '" style="' . esc_attr($a['style']) . '">';
+		$pricingTable .= '<tbody>';
+			$pricingTable .= '<tr>';
+			$pricingTable .= '<th>GUESTS</th>';
+			$pricingTable .= '<th>FULL-BOARD USD/WEEK</th>';
+			$pricingTable .= '</tr>';
+		$pricingTableCounter = 0;
+		while(have_rows('pricing_table_repeater')): the_row();
+		$pricingTableCounter++;
+
+		// if($pricingTableCounter == 1){
+		// 	$pricingTable .= '<tr>';
+		// 	$pricingTable .= '<th>' . get_sub_field('left_column') . '</th>';
+		// 	$pricingTable .= '<th>' . get_sub_field('right_column') . '</th>';
+		// 	$pricingTable .= '</tr>';
+		// } else {
+			$pricingTable .= '<tr>';
+			$pricingTable .= '<td>' . get_sub_field('left_column') . '</td>';
+			$pricingTable .= '<td>' . get_sub_field('right_column') . '</td>';
+			$pricingTable .= '</tr>';
+		// }
+		endwhile;
+		$pricingTable .= '</tbody>';
+		$pricingTable .= '</table>';
+	endif;
+
+	return $pricingTable;
+
+	// [pricing_table class="" style=""]
+}
+
+add_shortcode( 'pricing_table', 'pricing_table_shortcode' );
 
 // ENABLE WOOCOMMERCE
 // add_action('after_setup_theme',function() {
