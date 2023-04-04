@@ -262,9 +262,9 @@ endwhile; endif;
         echo '<div class="container pt-5">';
         
         if($imgSide == 'Left'){
-            echo '<div class="row justify-content-between align-items-end">';
+            echo '<div class="row justify-content-between">';
         } else {
-            echo '<div class="row justify-content-between align-items-end flex-row-reverse">';
+            echo '<div class="row justify-content-between flex-row-reverse">';
         }
         
         echo '<div class="col-lg-6 p-0">';
