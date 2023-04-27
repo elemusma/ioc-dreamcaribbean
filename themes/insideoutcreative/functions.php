@@ -36,6 +36,7 @@ wp_enqueue_style('proxima-nova', get_theme_file_uri('/proxima-nova/proxima-nova.
 // wp_enqueue_style('blair-itc', get_theme_file_uri('/blair-itc/blair-itc.css'));
 // wp_enqueue_style('aspira', get_theme_file_uri('/aspira-font/aspira-font.css'));
 wp_enqueue_style('cormorant', '//use.typekit.net/elg3wqv.css');
+wp_enqueue_style('minion', '//use.typekit.net/drb4vig.css');
 
 
 }
@@ -222,6 +223,34 @@ function spacer_shortcode( $atts, $content = null ) {
 }
 
 add_shortcode( 'spacer', 'spacer_shortcode' );
+
+function titles_with_border( $atts, $content = null ) {
+
+	$a = shortcode_atts( array(
+
+		'class' => '',
+
+		'style' => '',
+
+		'pretitle' => '',
+
+		'title' => ''
+
+	), $atts );
+
+	$output = "";
+
+	$output .= '<div class="d-inline-block pl-4 pr-4" style="border-left:2px solid #33fff8;border-right: 2px solid #33fff8;letter-spacing:.2em;">';
+    $output .= '<span class="h6 d-block">' . esc_attr($a['pretitle']) . '</span>';
+    $output .= '<h2 class="cormorant-garamond h1">' . esc_attr($a['title']) . '</h2>';
+    $output .= '</div>';
+
+	return $output;
+
+	// [special_titles pretitle="" title=""]
+}
+
+add_shortcode( 'special_titles', 'titles_with_border' );
 
 function pricing_table_shortcode( $atts, $content = null ) {
 

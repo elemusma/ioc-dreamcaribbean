@@ -161,10 +161,12 @@ endwhile; endif;
 
     if(have_rows('titles_group')): while(have_rows('titles_group')): the_row();
     echo '<section class="text-center p-5 ' . get_sub_field('classes') . '" style="' . get_sub_field('style') . '" id="' . get_sub_field('id') . '">';
+
     echo '<div class="d-inline-block pl-4 pr-4" style="border-left:2px solid #33fff8;border-right: 2px solid #33fff8;letter-spacing:.2em;">';
     echo '<span class="h6 d-block">' . get_sub_field('pretitle') . '</span>';
     echo '<h2 class="cormorant-garamond h1">' . get_sub_field('title') . '</h2>';
     echo '</div>';
+
     echo '</section>';
 endwhile; endif;
 } elseif ($layout == 'Content'){
@@ -454,6 +456,111 @@ endwhile; endif;
 
     echo '</section>';
 
+    endwhile; endif;
+} elseif ($layout == 'Two Text Columns'){
+    if(have_rows('two_text_columns')): while(have_rows('two_text_columns')): the_row();
+
+    echo '<section class="pt-5 pb-5 content-image bg-light-gray ' . get_sub_field('classes') . '" style="' . get_sub_field('style') . '" id="' . get_sub_field('id') . '">';
+
+    echo '<div class="container">';
+    echo '<div class="row">';
+
+    if(have_rows('left_content_block')): while(have_rows('left_content_block')): the_row();
+    echo '<div class="col-lg-6  .' . get_sub_field('column_classes') . '" style="' . get_sub_field('column_classes') . '">';
+
+    echo get_sub_field('content');
+
+    echo '</div>';
+    endwhile; endif;
+    
+    if(have_rows('right_content_block')): while(have_rows('right_content_block')): the_row();
+    echo '<div class="col-lg-6  .' . get_sub_field('column_classes') . '" style="' . get_sub_field('column_classes') . '">';
+
+    echo get_sub_field('content');
+
+    echo '</div>';
+    endwhile; endif;
+
+    echo '</div>';
+    echo '</div>';
+
+    echo '</section>';
+
+    endwhile; endif;
+} elseif ($layout == 'Three Column Gallery'){
+    if(have_rows('three_column_gallery')): while(have_rows('three_column_gallery')): the_row();
+    echo '<section class="pt-5 pb-5 three-column-gallery bg-light-gray ' . get_sub_field('classes') . '" style="' . get_sub_field('style') . '" id="' . get_sub_field('id') . '">';
+
+    $gallery = get_sub_field('gallery');
+    if( $gallery ): 
+        echo '<div class="container">';
+            echo '<div class="row">';
+            foreach( $gallery as $image ):
+                echo '<div class="col-md-4">';
+                // echo '<div class="position-relative">';
+                // echo '<a href="' . wp_get_attachment_image_url($image['id'], 'full') . '" data-lightbox="image-set" data-title="' . $image['title'] . '">';
+                echo wp_get_attachment_image($image['id'], 'full','',[
+                    'class'=>'w-100 img-portfolio',
+                    'style'=>'height:250px;object-fit:cover;'
+                    ] );
+                // echo '</a>';
+                // echo '</div>';
+                echo '</div>';
+            endforeach; 
+            echo '</div>';
+        echo '</div>';
+    endif;
+
+    echo '</section>';
+    endwhile; endif;
+} elseif ($layout == 'How We Work'){
+    if(have_rows('how_we_work_group')): while(have_rows('how_we_work_group')): the_row();
+    echo '<section class="pt-5 pb-5 three-column-gallery bg-light-gray ' . get_sub_field('classes') . '" style="' . get_sub_field('style') . '" id="' . get_sub_field('id') . '">';
+
+    echo '<div class="container">';
+    echo '<div class="row justify-content-center">';
+    echo '<div class="col-lg-6 text-center pb-4">';
+    echo '<h2 class="cormorant-garamond h1">' . get_sub_field('title') . '</h2>';
+    echo '</div>';
+    echo '</div>';
+    
+    if(have_rows('content_repeater')):
+        $howWeWorkRepeater = 0;
+        while(have_rows('content_repeater')): the_row();
+        $howWeWorkRepeater++;
+
+        echo '<div class="position-relative pt-4 pb-4">';
+        echo '<hr style="border-color:var(--accent-secondary);">';
+        echo '<span class="position-absolute font-italic" style="color:#8fb9da;opacity:.75;font-size:7rem;top:50%;left:50%;transform:translate(-50%,-45%);z-index:1;font-family: minion-pro, serif;">' . $howWeWorkRepeater . '</span>';
+        echo '</div>';
+
+        if($howWeWorkRepeater % 2 == 0){
+            echo '<div class="row flex-row-reverse justify-content-center">';
+            // echo '</div>';
+        } else {
+            echo '<div class="row justify-content-center">';
+        }
+
+        echo '<div class="col-lg-6">';
+        $img = get_sub_field('image');
+        echo wp_get_attachment_image($img['id'],'full','',[
+            'class'=>'w-100 h-auto',
+            'style'=>'object-fit:cover;'
+        ]);
+        echo '</div>';
+
+        echo '<div class="col-lg-6">';
+        echo get_sub_field('content');
+        echo '</div>';
+        
+
+        echo '</div>';
+        endwhile;
+    endif;
+
+    echo '</div>';
+
+    echo '</section>';
     endwhile; endif;
 }
 endwhile; endif;
