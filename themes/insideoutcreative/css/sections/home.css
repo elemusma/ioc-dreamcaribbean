@@ -121,3 +121,18 @@ table.pricing-table tr:nth-child(even) {
 }
 
 /* end of pricing table */
+
+/* start of process */
+.col-services * {
+    transition: all .25s ease-in-out;
+}
+
+.col-services:hover .col-services-hover {
+    background: var(--accent-secondary);
+}
+
+.col-services:hover * {
+    color: white !important;
+}
+
+/* end of process */
