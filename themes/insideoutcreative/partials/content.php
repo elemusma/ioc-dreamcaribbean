@@ -171,11 +171,22 @@ endwhile; endif;
 endwhile; endif;
 } elseif ($layout == 'Content'){
     if(have_rows('content_group')): while(have_rows('content_group')): the_row();
-    echo '<section class="text-center section-content pt-5 pb-5 ' . get_sub_field('classes') . '" style="' . get_sub_field('style') . '" id="' . get_sub_field('id') . '">';
+    echo '<section class="text-center section-content pt-5 pb-5 position-relative ' . get_sub_field('classes') . '" style="' . get_sub_field('style') . '" id="' . get_sub_field('id') . '">';
+
+    $bgImg = get_sub_field('background_image');
+
+    if($bgImg){
+        echo wp_get_attachment_image($bgImg['id'],'full','',[
+            'class'=>'w-100 h-100 position-absolute bg-img',
+            'style'=>'top:0;left:0;object-fit:cover;'
+        ]);
+    }
+
+    echo get_sub_field('optional_code');
 
     echo '<div class="container">';
     echo '<div class="row justify-content-center">';
-    echo '<div class="col-lg-9">';
+    echo '<div class="col-lg-9 ' . get_sub_field('column_classes') . '" style="' . get_sub_field('column_style') . '">';
 
     echo get_sub_field('content');
 
@@ -321,68 +332,26 @@ endwhile; endif;
     endwhile; endif;
 } elseif ($layout == 'Yachts'){
     if(have_rows('yachts_group')): while(have_rows('yachts_group')): the_row();
+    $yachts = get_sub_field('display_yachts');
     
-    if(get_sub_field('display_yachts') == 'Yes'){
+    if($yachts == 'Global') {
         if(have_rows('yachts_content','options')): while(have_rows('yachts_content','options')): the_row();
-
-        $bgImg = get_sub_field('background_image');
-    echo '<section class="position-relative ' . get_sub_field('classes') . '" style="padding:100px 0;' . get_sub_field('style') . '" id="' . get_sub_field('id') . '">';
-
-    if($bgImg){
-        echo wp_get_attachment_image($bgImg['id'],'full','',['class'=>'w-100 h-100 position-absolute','style'=>'top:0;left:0;object-fit:cover;']);
-    }
-
-    if(get_sub_field('content_top')){
-        echo '<div class="container">';
-        echo '<div class="row justify-content-center">';
-        echo '<div class="col-lg-9 text-center">';
-
-        echo get_sub_field('content_top');
-
-        echo '</div>';
-        echo '</div>';
-        echo '</div>';
-    }
-
-    $yachts = get_sub_field('yachts');
-
-    if( $yachts ):
-        echo '<div class="container">';
-        echo '<div class="row justify-content-center">';
-    foreach( $yachts as $post ): 
-    // Setup this post for WP functions (variable must be named $post).
-    setup_postdata($post);
-        echo '<a href="' . get_the_permalink() . '" class="col-lg-4 col-md-6 text-center mb-5 text-white" style="">';
-        echo '<div class="img-hover overflow-h">';
-            the_post_thumbnail('full',array(
-                'class'=>'w-100',
-                'style'=>'height:250px;object-fit:cover;'
-            ));
-        echo '</div>';
-        echo '<h3 class="text-white cormorant-garamond h5 text-uppercase pt-3 ls-2">' . get_the_title() . '</h3>';
-        echo '<span class="text-accent-tertiary text-uppercase ls-2" style="">LEARN MORE</span>';
-        echo '</a>';
-    endforeach;
-        // Reset the global post object so that the rest of the page works correctly.
-        wp_reset_postdata(); 
-        echo '</div>';
-        echo '</div>';
-    endif;
-
-    if(get_sub_field('content_bottom')){
-        echo '<div class="container">';
-        echo '<div class="row justify-content-center">';
-        echo '<div class="col-lg-9 text-center">';
-
-        echo get_sub_field('content_bottom');
-
-        echo '</div>';
-        echo '</div>';
-        echo '</div>';
-    }
-
-    echo '</section>';
+    
+        echo get_template_part('partials/yachts');
         
+        endwhile; endif;
+    } elseif($yachts == 'Individual'){
+        if(have_rows('yachts_clone_group')): while(have_rows('yachts_clone_group')): the_row();
+        if(have_rows('yachts_content')): while(have_rows('yachts_content')): the_row();
+    
+        // $bgImg = get_sub_field('background_image');
+        // if($bgImg){
+        //     echo wp_get_attachment_image($bgImg['id'],'full','',['class'=>'w-100 h-100 position-absolute','style'=>'top:0;left:0;object-fit:cover;']);
+        // }
+        // echo 'hello';
+        echo get_template_part('partials/yachts');
+        
+        endwhile; endif;
         endwhile; endif;
     }
 
@@ -490,6 +459,22 @@ endwhile; endif;
 } elseif ($layout == 'Three Column Gallery'){
     if(have_rows('three_column_gallery')): while(have_rows('three_column_gallery')): the_row();
     echo '<section class="pt-5 pb-5 three-column-gallery bg-light-gray ' . get_sub_field('classes') . '" style="' . get_sub_field('style') . '" id="' . get_sub_field('id') . '">';
+
+echo '<div class="container">';
+echo '<div class="row justify-content-center">';
+
+
+echo '<div class="col-lg-9 text-center pb-5 ' . get_sub_field('column_classes') . '" style="' . get_sub_field('column_style') . '">';
+
+
+echo get_sub_field('content');
+
+echo '</div>';
+
+
+echo '</div>';
+echo '</div>';
+
 
     $gallery = get_sub_field('gallery');
     if( $gallery ): 
@@ -753,6 +738,134 @@ endwhile; endif;
         echo '</div>';
     endif;
 
+    echo '</section>';
+    endwhile; endif;
+} elseif($layout == 'Content in Overlay'){
+    if(have_rows('content_in_overlay')): while(have_rows('content_in_overlay')): the_row();
+
+    echo '<section class="position-relative text-columns text-white ' . get_sub_field('classes') . '" style="padding:300px 0 400px;' . get_sub_field('style') . '" id="' . get_sub_field('id') . '">';
+
+    // echo get_template_part('partials/borders-gold');
+
+    $bgImg = get_sub_field('background_image');
+
+    if($bgImg){
+        echo wp_get_attachment_image($bgImg['id'],'full','',[
+            'class'=>'w-100 h-100 position-absolute bg-img',
+            'style'=>'top:0;left:0;object-fit:cover;'
+        ]);
+    }
+
+    echo '<div class="position-absolute w-100 h-100" style="background: rgb(93,82,103);
+background: linear-gradient(0deg, rgba(93,82,103,.7) 10%, rgba(255,255,255,0) 50%, rgba(93,82,103,1) 90%);top:0;left:0;mix-blend-mode:multiply;"></div>';
+
+// if(have_rows('header_content')): while(have_rows('header_content')): the_row();
+
+$headerIcon = get_sub_field('icon');
+
+if($headerIcon){
+    echo wp_get_attachment_image($headerIcon['id'],'full','',
+        [
+            'class'=>'position-absolute',
+            'style'=>'
+                width: 75px;
+                height: 75px;
+                bottom: 25px;
+                left: 50%;
+                transform: translate(-50%,0);'
+        ]
+    );
+}
+
+// endwhile; endif;
+
+echo '<div class="position-relative">';
+echo '<div class="multiply overlay position-absolute w-100 h-100 bg-img"></div>';
+// echo '<div class="position-relative">';
+echo '<div class="container">';
+echo '<div class="row justify-content-center">';
+echo '<div class="col-lg-10 text-center">';
+
+echo '<div class="d-inline-block position-relative" style="min-width:230px;">';
+echo get_template_part('partials/borders');
+
+
+
+echo '<div class="pl-3 pr-3 pt-2">';
+
+    echo get_sub_field('content');
+
+echo '</div>';
+echo '</div>';
+
+echo '</div>';
+echo '</div>';
+echo '</div>';
+// echo '</div>';
+echo '</div>';
+
+echo '</section>';
+    endwhile; endif;
+} elseif($layout == 'Team'){
+
+    if(have_rows('team_clone_group')): while(have_rows('team_clone_group')): the_row();
+
+    echo '<section class="position-relative section-team pt-5 pb-5 ' . get_sub_field('classes') . '" style="' . get_sub_field('style') . '" id="' . get_sub_field('id') . '">';
+
+    $bgImg = get_sub_field('background_image');
+
+    if($bgImg){
+        echo wp_get_attachment_image($bgImg['id'],'full','',[
+            'class'=>'w-100 h-100 position-absolute bg-img',
+            'style'=>'top:0;left:0;object-fit:cover;pointer-events:none;'
+        ]);
+    }
+
+    echo '<div class="container">';
+    echo '<div class="row justify-content-center">';
+
+    echo '<div class="col-lg-9 text-center pb-4 ' . get_sub_field('column_classes') . '" style="' . get_sub_field('column_style') . '">';
+
+    echo get_sub_field('content');
+
+    echo '</div>';
+
+    echo '</div>';
+    echo '</div>';
+
+    echo '<div class="container">';
+    if(have_rows('team_repeater')):
+    echo '<div class="row justify-content-center">';
+    $teamCounter = 0;
+    while(have_rows('team_repeater')): the_row();
+    $img = get_sub_field('image');
+
+    $teamCounter++;
+    if($teamCounter > 4){
+        $teamCounter = 1;
+    }
+        echo '<div class="col-lg-3 col-md-6 mt-5 mb-3 text-center">';
+        echo '<div data-aos="fade-up" data-aos-delay="' . $teamCounter . '00">';
+
+        echo wp_get_attachment_image($img['id'],'full','',[
+            'class'=>'w-100',
+            'style'=>'height:300px;object-fit:cover;object-position:top;'
+        ]);
+
+        echo '<div>';
+        echo '<span class="pt-4 d-inline-block">' . get_sub_field('name') . '</span>';
+        echo '<div class="small" style="color:#8d8c8a;">';
+        echo get_sub_field('description');
+        echo '</div>';
+        echo '</div>';
+
+        echo '</div>';
+        echo '</div>';
+    endwhile;
+    echo '</div>';
+    endif;
+    echo '</div>';
+    
     echo '</section>';
     endwhile; endif;
 }

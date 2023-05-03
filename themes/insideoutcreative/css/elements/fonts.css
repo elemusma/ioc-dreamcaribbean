@@ -87,9 +87,11 @@ blockquote {
 }
 
 .cormorant-garamond,
-h1 {
+h1,
+.h1 {
   font-family: cormorant-garamond, serif;
   font-weight: 400;
+  letter-spacing: .2em;
 }
 
 h1,

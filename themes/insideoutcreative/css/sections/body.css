@@ -164,7 +164,7 @@ hr.text-white {
 }
 
 .divider {
-  border-top: 2px solid var(--accent-primary);
+  border-top: 2px solid var(--accent-secondary);
   width: 200px;
   margin: 10px auto;
 }

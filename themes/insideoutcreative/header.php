@@ -100,101 +100,104 @@ echo '</div>';
 
 echo '</header>';
 
-if(!is_front_page()) {
 
-echo '<section class="hero position-relative overflow-h">';
-$globalPlaceholderImg = get_field('global_placeholder_image','options');
-if(is_page()){
-if(has_post_thumbnail()){
-the_post_thumbnail('full', array('class' => 'w-100 bg-img position-absolute img-parallax-custom','style'=>'height:106%;'));
-} else {
-echo wp_get_attachment_image($globalPlaceholderImg['id'],'full','',['class'=>'w-100 bg-img position-absolute img-parallax-custom','style'=>'height:106%;']);
-}
-} else {
-echo wp_get_attachment_image($globalPlaceholderImg['id'],'full','',['class'=>'w-100 bg-img position-absolute img-parallax-custom','style'=>'height:106%;']);
-}
+// if(!is_front_page()) {
 
-
-if(!is_front_page() && is_page()) {
-echo '<div class="text-white text-center position-relative hero-padding" style="padding:300px 0px 400px">';
-
-echo '<div class="position-absolute w-100 h-100" style="background: rgb(93,82,103);
-background: linear-gradient(0deg, rgba(93,82,103,.7) 10%, rgba(255,255,255,0) 50%, rgba(93,82,103,1) 90%);top:0;left:0;mix-blend-mode:multiply;"></div>';
-
-if(have_rows('header_content')): while(have_rows('header_content')): the_row();
-
-$headerIcon = get_sub_field('header_icon');
-
-if($headerIcon){
-    echo wp_get_attachment_image($headerIcon['id'],'full','',
-        [
-            'class'=>'position-absolute',
-            'style'=>'
-                width: 75px;
-                height: 75px;
-                bottom: 25px;
-                left: 50%;
-                transform: translate(-50%,0);'
-        ]
-    );
-}
-
-endwhile; endif;
-
-echo '<div class="position-relative test-connection">';
-echo '<div class="multiply overlay position-absolute w-100 h-100 bg-img"></div>';
-echo '<div class="position-relative">';
-echo '<div class="container">';
-echo '<div class="row justify-content-center">';
-echo '<div class="col-lg-10">';
-
-echo '<div class="d-inline-block position-relative" style="min-width:230px;">';
-echo get_template_part('partials/borders');
-
-echo '<h1 class="pt-3 pb-3 mb-0 text-uppercase pl-lg-4 pr-lg-4" style="letter-spacing:.2em;">' . get_the_title() . '</h1>';
-
-echo '<div class="pl-3 pr-3">';
-if ( have_posts() ) : while ( have_posts() ) : the_post();
-the_content();
-endwhile; else:
-    echo '<p>Sorry, no posts matched your criteria.</p>';
-endif;
-echo '</div>';
-echo '</div>';
-
-echo '</div>';
-echo '</div>';
-echo '</div>';
-echo '</div>';
-echo '</div>';
-echo '</div>';
-}
+// echo '<section class="hero position-relative overflow-h">';
+// $globalPlaceholderImg = get_field('global_placeholder_image','options');
+// if(is_page()){
+// if(has_post_thumbnail()){
+// the_post_thumbnail('full', array('class' => 'w-100 bg-img position-absolute img-parallax-custom','style'=>'height:106%;'));
+// } else {
+// echo wp_get_attachment_image($globalPlaceholderImg['id'],'full','',['class'=>'w-100 bg-img position-absolute img-parallax-custom','style'=>'height:106%;']);
+// }
+// } else {
+// echo wp_get_attachment_image($globalPlaceholderImg['id'],'full','',['class'=>'w-100 bg-img position-absolute img-parallax-custom','style'=>'height:106%;']);
+// }
 
 
+// if(!is_front_page() && is_page()) {
+// echo '<div class="text-white text-center position-relative hero-padding" style="padding:300px 0px 400px">';
 
-if(!is_front_page() && !is_page()) {
-echo '<div class="container pt-5 pb-5 text-white text-center">';
-echo '<div class="row">';
-echo '<div class="col-md-12">';
-if(is_single()){
-echo '<h1 class="">' . single_post_title() . '</h1>';
-} elseif(is_author()){
-echo '<h1 class="">Author: ' . get_the_author() . '</h1>';
-} elseif(is_tag()){
-echo '<h1 class="">' . get_single_tag_title() . '</h1>';
-} elseif(is_category()){
-echo '<h1 class="">' . get_single_cat_title() . '</h1>';
-} elseif(is_archive()){
-echo '<h1 class="">' . get_archive_title() . '</h1>';
-}
-elseif(!is_front_page() && is_home()){
-echo '<h1 class="">' . get_the_title(133) . '</h1>';
-}
-echo '</div>';
-echo '</div>';
-echo '</div>';
-}
+// echo '<div class="position-absolute w-100 h-100" style="background: rgb(93,82,103);
+// background: linear-gradient(0deg, rgba(93,82,103,.7) 10%, rgba(255,255,255,0) 50%, rgba(93,82,103,1) 90%);top:0;left:0;mix-blend-mode:multiply;"></div>';
 
-echo '</section>';
-} // end of !is_front_page()
+// if(have_rows('header_content')): while(have_rows('header_content')): the_row();
+
+// $headerIcon = get_sub_field('header_icon');
+
+// if($headerIcon){
+//     echo wp_get_attachment_image($headerIcon['id'],'full','',
+//         [
+//             'class'=>'position-absolute',
+//             'style'=>'
+//                 width: 75px;
+//                 height: 75px;
+//                 bottom: 25px;
+//                 left: 50%;
+//                 transform: translate(-50%,0);'
+//         ]
+//     );
+// }
+
+// endwhile; endif;
+
+// echo '<div class="position-relative">';
+// echo '<div class="multiply overlay position-absolute w-100 h-100 bg-img"></div>';
+// echo '<div class="position-relative">';
+// echo '<div class="container">';
+// echo '<div class="row justify-content-center">';
+// echo '<div class="col-lg-10">';
+
+// echo '<div class="d-inline-block position-relative" style="min-width:230px;">';
+// echo get_template_part('partials/borders');
+
+// echo '<h1 class="pt-3 pb-3 mb-0 text-uppercase pl-lg-4 pr-lg-4" style="letter-spacing:.2em;">' . get_the_title() . '</h1>';
+
+// echo '<div class="pl-3 pr-3">';
+// if ( have_posts() ) : while ( have_posts() ) : the_post();
+// the_content();
+// endwhile; else:
+//     echo '<p>Sorry, no posts matched your criteria.</p>';
+// endif;
+// echo '</div>';
+// echo '</div>';
+
+// echo '</div>';
+// echo '</div>';
+// echo '</div>';
+// echo '</div>';
+// echo '</div>';
+
+
+// echo '</div>';
+// }
+
+
+
+// if(!is_front_page() && !is_page()) {
+// echo '<div class="container pt-5 pb-5 text-white text-center">';
+// echo '<div class="row">';
+// echo '<div class="col-md-12">';
+// if(is_single()){
+// echo '<h1 class="">' . single_post_title() . '</h1>';
+// } elseif(is_author()){
+// echo '<h1 class="">Author: ' . get_the_author() . '</h1>';
+// } elseif(is_tag()){
+// echo '<h1 class="">' . get_single_tag_title() . '</h1>';
+// } elseif(is_category()){
+// echo '<h1 class="">' . get_single_cat_title() . '</h1>';
+// } elseif(is_archive()){
+// echo '<h1 class="">' . get_archive_title() . '</h1>';
+// }
+// elseif(!is_front_page() && is_home()){
+// echo '<h1 class="">' . get_the_title(133) . '</h1>';
+// }
+// echo '</div>';
+// echo '</div>';
+// echo '</div>';
+// }
+
+// echo '</section>';
+// } // end of !is_front_page()
 ?>
