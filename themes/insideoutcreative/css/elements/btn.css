@@ -21,7 +21,7 @@
 } */
 
 .btn-main:hover {
-    background: var(--accent-secondary);
+    background: var(--accent-primary);
     color: white;
     text-decoration: none;
 }

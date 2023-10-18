@@ -27,7 +27,7 @@ $bgImg = get_sub_field('background_image');
     foreach( $yachts as $post ): 
     // Setup this post for WP functions (variable must be named $post).
     setup_postdata($post);
-        echo '<a href="' . get_the_permalink() . '" class="col-lg-4 col-md-6 text-center mb-5 text-white" style="">';
+        echo '<a href="' . get_the_permalink() . '" class="col-lg-4 col-md-6 text-center mb-5 text-white col-yachts" style="">';
         echo '<div class="img-hover overflow-h">';
             the_post_thumbnail('full',array(
                 'class'=>'w-100',

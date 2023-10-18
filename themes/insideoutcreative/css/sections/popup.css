@@ -10,11 +10,12 @@
   transition: all 0.25s ease-in-out;
   pointer-events: none;
   background: transparent;
+  z-index: 10;
 }
 
 .modal-content.activate-modal {
   opacity: 1 !important;
-  pointer-events: all;
+  pointer-events: all !important;
 }
 
 .bg-overlay {
@@ -28,6 +29,7 @@
 
 .bg-content {
   width: 95%;
+  height: 90%;
   background: white;
   position: relative;
   margin: auto;

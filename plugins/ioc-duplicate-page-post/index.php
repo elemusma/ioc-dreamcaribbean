@@ -3,7 +3,7 @@
 
 Plugin Name: Duplicate Page or Post
 
-Plugin URI: https://akismet.com/ 
+Plugin URI: https://insideoutcreative.io/
 
 Description: Minimal plugin to duplicate a page or post. 
 
@@ -13,7 +13,7 @@ Author: Inside Out Creative
 
 Author URI: https://insideoutcreative.io/
 
-Text Domain: ioc
+Text Domain: Inside Out Creative
 
 */
 

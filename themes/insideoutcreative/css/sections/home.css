@@ -1,3 +1,9 @@
+/* start of content in overlay */
+.promotion-text p {
+	line-height:1;
+}
+/* end of content in overlay */
+
 /* start of bars */
 
 .inner-content-outer:hover .icon-state {
@@ -136,3 +142,66 @@ table.pricing-table tr:nth-child(even) {
 }
 
 /* end of process */
+
+/* start of content + image */
+.owl-carousel.h-100 .owl-stage-outer,
+.owl-carousel.h-100 .owl-stage-outer .owl-stage,
+.owl-carousel.h-100 .owl-stage-outer .owl-stage .owl-item {
+    height: 100% !important;
+}
+
+/* end of content + image */
+
+/* start of carousel */
+.review-carousel .owl-nav {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    width: 100%;
+}
+
+button.owl-prev {
+    position: absolute;
+    left: 20%;
+}
+
+button.owl-next {
+    position: absolute;
+    right: 20%;
+}
+.yachts-carousel button.owl-prev {
+    position: absolute;
+    left: -5%;
+    top: 25%;
+}
+.yachts-carousel button.owl-next {
+    position: absolute;
+    right: -5%;
+    top: 25%;
+}
+.yachts-carousel .owl-prev span, .yachts-carousel .owl-next span {
+    color: white;
+}
+/* end of carousel */
+
+/* start of amenities */
+.col-amenities ul li {
+    position: relative;
+}
+
+.col-amenities ul li:before {
+    content: "";
+    background: url(https://insideoutcreative.io/wp-content/uploads/2023/07/Diamond.png);
+    background-size: 100%;
+    position: absolute;
+    top: 12px;
+    left: -20px;
+    width: 9px;
+    height: 9px;
+}
+
+.col-amenities ul {
+    list-style: none;
+}
+/* end of amenities */

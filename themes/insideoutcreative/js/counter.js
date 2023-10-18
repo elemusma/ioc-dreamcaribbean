@@ -10,7 +10,7 @@ dataArray.map((data) => {
             clearInterval(stopInterval)
         }
     }
-    let stopInterval = setInterval(counterUp, 30)
+    let stopInterval = setInterval(counterUp, 50)
 })
 
 let dataLarge = document.querySelectorAll(".counter-large")
@@ -25,5 +25,5 @@ dataArrayLarge.map((dataLarge) => {
             clearInterval(stopInterval)
         }
     }
-    let stopInterval = setInterval(counterUp, 30)
+    let stopInterval = setInterval(counterUp, 10)
 })

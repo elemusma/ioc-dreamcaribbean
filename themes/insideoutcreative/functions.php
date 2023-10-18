@@ -179,11 +179,13 @@ function btn_shortcode( $atts, $content = null ) {
 	
 	'class' => '',
 	
-	'href' => '#',
+	'href' => '',
 	
 	'style' => '',
 	
-	'target' => ''
+	'target' => '',
+
+	'id' => ''
 	
 	), $atts );
 	
@@ -191,7 +193,7 @@ function btn_shortcode( $atts, $content = null ) {
 
 	$button = "";
 
-	$button .= '<a class="btn-main d-inline-block pt-2 pb-2 pl-4 pr-4 bg-accent-secondary text-white bold ls-2 small ' . esc_attr($a['class']) . '" href="' . esc_attr($a['href']) . '" style="transition:all .25s ease-in-out;box-shadow:0px 3px 3px rgba(0,0,0,.25);border:1px solid #b0bcbf;' . esc_attr($a['style']) . '" target="' . esc_attr($a['target']) . '">';
+	$button .= '<a class="btn-main d-inline-block pt-2 pb-2 pl-4 pr-4 bg-accent-secondary text-white bold ls-2 small ' . esc_attr($a['class']) . '" href="' . esc_attr($a['href']) . '" style="transition:all .25s ease-in-out;box-shadow:0px 3px 3px rgba(0,0,0,.25);border:1px solid #b0bcbf;' . esc_attr($a['style']) . '" target="' . esc_attr($a['target']) . '" id="' . esc_attr($a['id']) . '">';
 
 	$button .= '<span class="pt-1 pb-1 pl-5 pr-5 d-inline-block" style="border:1px solid white;">';
 	$button .= $content;
@@ -206,6 +208,40 @@ function btn_shortcode( $atts, $content = null ) {
 	}
 	
 	add_shortcode( 'button', 'btn_shortcode' );
+
+	function btn_span_shortcode( $atts, $content = null ) {
+
+	$a = shortcode_atts( array(
+	
+	'class' => '',
+	
+	'style' => '',
+	
+	'target' => '',
+
+	'id' => ''
+	
+	), $atts );
+	
+	// return '<a class="btn-accent-primary" href="' . esc_attr($a['href']) . '" target="' . esc_attr($a['target']) . '">' . $content . '</a>';
+
+	$button = "";
+
+	$button .= '<div class="btn-main d-inline-block pt-2 pb-2 pl-4 pr-4 bg-accent-secondary text-white bold ls-2 small ' . esc_attr($a['class']) . '" style="transition:all .25s ease-in-out;box-shadow:0px 3px 3px rgba(0,0,0,.25);border:1px solid #b0bcbf;' . esc_attr($a['style']) . '" target="' . esc_attr($a['target']) . '" id="' . esc_attr($a['id']) . '">';
+
+	$button .= '<span class="pt-1 pb-1 pl-5 pr-5 d-inline-block" style="border:1px solid white;">';
+	$button .= $content;
+
+	$button .= '</span>';
+	$button .= '</div>';
+	
+	return $button;
+	
+	// [buttonmodal class="btn-main" style=""]Learn More[/buttonmodal]
+	
+	}
+	
+	add_shortcode( 'buttonmodal', 'btn_span_shortcode' );
 
 function spacer_shortcode( $atts, $content = null ) {
 
@@ -304,52 +340,77 @@ function my_page_title_shortcode() {
 }
 add_shortcode('page_title', 'my_page_title_shortcode');
 
-// ENABLE WOOCOMMERCE
-// add_action('after_setup_theme',function() {
-//     add_theme_support('woocommerce');
-// });
-// add_theme_support('wc-product-gallery-zoom');
-// add_theme_support('wc-product-gallery-lightbox');
-// add_theme_support('wc-product-gallery-slider');
+  function rewrite_relative_urls($content) {
+	$base_url = home_url('/');
+  
+	// Regex pattern to match relative URLs
+	$pattern = '/(href|src)=["\'](?!http|\/\/)([^"\']+)[\'"]/i';
+	
+	// Replace relative URLs with absolute URLs
+	$content = preg_replace_callback($pattern, function ($matches) use ($base_url) {
+	  $relative_url = $matches[2];
+	  $absolute_url = $base_url . ltrim($relative_url, '/');
+	  return $matches[1] . '="' . $absolute_url . '"';
+	}, $content);
+  
+	return $content;
+  }
+  
+  add_action('template_redirect', 'redirect_relative_urls');
 
 
-// WOOCOMMERCE CONTENT WITH NO SIDEBAR
-// add_action('woocommerce_before_main_content','add_container_class',9);
-// function add_container_class(){
-// echo '<div class="container pt-5 pb-5">';
-// echo '<div class="row justify-content-center">';
-// echo '<div class="col-md-12">';
-// }
+function social_media_icons( $atts, $content = null ) {
 
-// add_action('woocommerce_after_main_content','close_container_class',9);
-// function close_container_class(){
-// echo '</div>';
-// echo '</div>';
-// echo '</div>';
-// }
+	$a = shortcode_atts( array(
 
-// removes sidebar
-// remove_action('woocommerce_sidebar','woocommerce_get_sidebar');
+		'class' => '',
 
+		'style' => '',
 
+		'icon-class' => '',
 
-// WOOCOMMERCE CONTENT WITH CUSTOM SIDEBAR
-// add_action('woocommerce_before_main_content','add_container_class',9);
-// function add_container_class(){
-// echo '<div class="container pt-5 pb-5" style="">';
-// echo '<div class="row">';
+		'icon-style' => ''
 
-// echo get_template_part('partials/sidebar');
+	), $atts );
 
-// echo '<div class="col-md-9 order-1 order-md-2">';
-// }
+	$socialIcons = '';
 
-// add_action('woocommerce_after_main_content','close_container_class',9);
-// function close_container_class(){
-// echo '</div>';
-// echo '</div>';
-// echo '</div>';
-// }
+	if(have_rows('social_icons','options')): 
+		$socialIcons .= '<div class="si d-flex flex-wrap ' . esc_attr($a['class']) . '" style="' . esc_attr($a['style']) . '">';
+		while(have_rows('social_icons','options')): the_row(); 
+	$svgOrImg = get_sub_field('svg_or_image');
+	$socialLink = get_sub_field('link');
+	$svg = get_sub_field('svg');
+	$image = get_sub_field('image');
+	
+	$socialLink_url = $socialLink['url'];
+	$socialLink_title = $socialLink['title'];
+	$socialLink_target = $socialLink['target'] ? $socialLink['target'] : '_self';
+	
+	$socialIcons .= '<a href="' . $socialLink_url . '" target="' . $socialLink_target . '" style="text-decoration:none;" class="si-icon-link">';
+	
+	if($svgOrImg == 'SVG') {
+	
+		$socialIcons .= '<div class="svg-icon">';
+		$socialIcons .= $svg;
+		$socialIcons .= '</div>';
+	} elseif($svgOrImg == 'Image') {
+	
+		$socialIcons .= wp_get_attachment_image($image['id'],'full','',['class'=>'img-si']);
+	
+	}
+	$socialIcons .= '</a>';
+	
+	endwhile; 
+	
+	$socialIcons .= '</div>';
+	endif; 
 
-// removes sidebar
-// remove_action('woocommerce_sidebar','woocommerce_get_sidebar');
+	return $socialIcons;
+	// return get_template_part('partials/si');
+
+	// [social_icons class="" style=""]
+
+}
+
+add_shortcode( 'social_icons', 'social_media_icons' );

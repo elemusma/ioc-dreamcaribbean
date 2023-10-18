@@ -1,0 +1,28 @@
+/* start of tabs */
+.content-area:not(.activate) {
+    top: 0px;
+    pointer-events: none;
+}
+
+.content-area {
+    transition: all .25s ease-in-out;
+}
+
+.tab-title {
+    background: #ddd;
+    border-radius: 0;
+    padding: 10px 20px;
+    border: 1px solid #dee2e6 !important;
+    font-weight: 700;
+    border-radius: 45px;
+    padding: 15px 45px;
+    margin: 0 15px;
+}
+
+.tab-title.active {
+    pointer-events: none;
+    background: white;
+    color: var(--accent-tertiary);
+}
+
+/* end of tabs */
