@@ -1342,7 +1342,11 @@ if(have_rows('yachts_filter')): while(have_rows('yachts_filter')): the_row();
 		$yachtsCounter = 0;
 	echo '<div class="container">';
     echo '<div class="row justify-content-center">';
-    echo '<div class="col-lg-9 text-center" style="">';
+    echo '<div class="col-12 text-center" style="">';
+
+    echo '<span class="bold position-absolute text-accent-tertiary" style="top: 50%;
+    left: 0;
+    transform: translate(0px, -50%);">Click Icons to Choose Different Location:</span>';
 	while(have_rows('yachts_filter_repeater')): the_row();
 		$yachtsCounter++;
 		$ID = sanitize_title_with_dashes(get_sub_field('location'));
@@ -1356,26 +1360,27 @@ if(have_rows('yachts_filter')): while(have_rows('yachts_filter')): the_row();
 
     echo wp_get_attachment_image($img['id'],'full','',[
         'class'=>'h-auto',
-        'style'=>'width:50px;object-fit:contain;'
+        'style'=>'width:50px;object-fit:contain;transition:all .25s ease-in-out;'
     ]);
 
-    echo '<p class="mb-0">' . get_sub_field('location') . '</p>';
+    echo '<p class="mb-0" style="transition:all .25s ease-in-out;">' . get_sub_field('location') . '</p>';
     echo '</div>';
 	} else {
         echo '<div id="' . $ID . '" class="btn tab-title">'; 
 
         echo wp_get_attachment_image($img['id'],'full','',[
             'class'=>'h-auto',
-            'style'=>'width:50px;object-fit:contain;'
+            'style'=>'width:50px;object-fit:contain;transition:all .25s ease-in-out;'
         ]);
     
-        echo '<p class="mb-0">' . get_sub_field('location') . '</p>';
+        echo '<p class="mb-0" style="transition:all .25s ease-in-out;">' . get_sub_field('location') . '</p>';
         echo '</div>';
 	}
 	
 
 		
 	endwhile;
+
 	echo '</div>';
     echo '</div>';
     echo '</div>';
@@ -1404,7 +1409,7 @@ if(have_rows('yachts_filter')): while(have_rows('yachts_filter')): the_row();
 
 
     if( $yachts ):
-        echo '<div class="container">';
+        echo '<div class="container p-0">';
         echo '<div class="row justify-content-center">';
     foreach( $yachts as $post ): 
     // Setup this post for WP functions (variable must be named $post).

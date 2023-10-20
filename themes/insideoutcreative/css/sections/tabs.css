@@ -9,10 +9,10 @@
 }
 
 .tab-title {
-    background: #ddd;
-    border-radius: 0;
-    padding: 10px 20px;
-    border: 1px solid #dee2e6 !important;
+    color: #ddd;
+    /* border-radius: 0; */
+    /* padding: 10px 20px; */
+    /* border: 1px solid #dee2e6 !important; */
     font-weight: 700;
     border-radius: 45px;
     padding: 15px 45px;
@@ -21,8 +21,17 @@
 
 .tab-title.active {
     pointer-events: none;
-    background: white;
-    color: var(--accent-tertiary);
+    /* background: white; */
+    color: #f6cf98;
+    /* color: white; */
+}
+
+.tab-title.active img {
+    width: 75px !important;
+}
+
+.tab-title.active p {
+    font-size: 1.5rem;
 }
 
 /* end of tabs */
